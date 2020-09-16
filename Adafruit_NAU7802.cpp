@@ -310,6 +310,21 @@ NAU7802_SampleRate Adafruit_NAU7802::getRate(void) {
 
 /**************************************************************************/
 /*!
+    @brief  The desired channel selector
+    @param channel NAU7802_CH1, NAU7802_CH2
+    @returns False if there was any error during I2C comms
+*/
+/**************************************************************************/
+bool Adafruit_NAU7802::setChannel(NAU7802_ChannelSelect channel) {
+  Adafruit_I2CRegister ctrl2_reg = Adafruit_I2CRegister(i2c_dev, NAU7802_CTRL2);
+  Adafruit_I2CRegisterBits channel_select =
+      Adafruit_I2CRegisterBits(&ctrl2_reg, 1, 7); // # bits, bit_shift
+
+  return channel_select.write(channel);
+}
+
+/**************************************************************************/
+/*!
     @brief  Perform the internal calibration procedure
     @param mode The calibration mode to perform: NAU7802_CALMOD_INTERNAL,
     NAU7802_CALMOD_OFFSET or NAU7802_CALMOD_GAIN
