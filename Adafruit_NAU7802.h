@@ -64,6 +64,12 @@ typedef enum _sample_rates {
   NAU7802_RATE_320SPS = 7,
 } NAU7802_SampleRate;
 
+/*! The possible channels */
+typedef enum _channels {
+  NAU7802_CH1 = 0,
+  NAU7802_CH2 = 1,
+} NAU7802_ChannelSelect;
+
 /*! The possible calibration modes */
 typedef enum _calib_mode {
   NAU7802_CALMOD_INTERNAL = 0,
@@ -91,6 +97,7 @@ public:
   NAU7802_Gain getGain(void);
   bool setRate(NAU7802_SampleRate gain);
   NAU7802_SampleRate getRate(void);
+  bool setChannel(NAU7802_ChannelSelect channel);
   bool calibrate(NAU7802_Calibration mode);
 
 private:
